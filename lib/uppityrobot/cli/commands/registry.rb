@@ -5,6 +5,7 @@ module UppityRobot
     module Commands
       extend Dry::CLI::Registry
 
+      register "exec", Exec
       register "version", Version, aliases: ["v", "-v", "--version"]
     end
   end
