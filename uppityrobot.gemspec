@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "dry-cli", "~> 0.7"
   spec.add_dependency "json", "~> 2.5"
+  spec.add_dependency "uptimerobot", "~> 0.2"
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.2"
