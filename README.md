@@ -84,6 +84,7 @@ bundle exec rspec
 
 # install locally
 bundle exec rake install
+gem uninstall uppityrobot
 ```
 
 ### Console examples
