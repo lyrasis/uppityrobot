@@ -12,7 +12,8 @@ require_relative "uppityrobot/cli/commands/version"
 # load the registry last
 require_relative "uppityrobot/cli/commands/registry"
 
-module Uppityrobot
+module UppityRobot
   class Error < StandardError; end
-  # Your code goes here...
+
+  ROOT = Gem::Specification.find_by_name("uppityrobot").gem_dir
 end

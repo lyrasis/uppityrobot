@@ -8,7 +8,7 @@ module UppityRobot
         desc "Print UppityRobot CLI tool version"
 
         def call(*)
-          puts Uppityrobot::VERSION
+          puts UppityRobot::VERSION
         end
       end
     end

@@ -4,7 +4,7 @@ require_relative "lib/uppityrobot/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "uppityrobot"
-  spec.version       = Uppityrobot::VERSION
+  spec.version       = UppityRobot::VERSION
   spec.authors       = ["Mark Cooper"]
   spec.email         = ["mark.c.cooper@outlook.com"]
 
@@ -30,7 +30,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "aruba"
   spec.add_development_dependency "cucumber"
+  spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.2"
   spec.add_development_dependency "rubocop", "~> 1.7"
+  spec.add_development_dependency "webmock"
 end

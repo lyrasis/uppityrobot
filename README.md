@@ -1,4 +1,4 @@
-# Uppityrobot
+# UppityRobot
 
 Command line wrapper for the UptimeRobot API (wrapper).
 
@@ -90,10 +90,10 @@ gem uninstall uppityrobot
 ### Console examples
 
 ```ruby
-client = Uppityrobot::Client.new(:getMonitors, {})
+client = UppityRobot::Client.new(:getMonitors, {})
 client.paginate.each { |r, o, t| puts o; puts r.inspect; }
 
-client = Uppityrobot::Client.new(:getMonitors, {search: 'aspace'})
+client = UppityRobot::Client.new(:getMonitors, {search: 'aspace'})
 client.filter({'friendly_name' => 'columbia'}).each { |m| puts m.inspect; }
 ```
 

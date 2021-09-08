@@ -20,7 +20,7 @@ module UppityRobot
         def call(task:, data: nil, params: "{}", **)
           task   = task.to_sym
           params = data.nil? ? JSON.parse(params) : parse_file(data)
-          puts Uppityrobot::Client.new(task, params).execute.to_json
+          puts UppityRobot::Client.new(task, params).execute.to_json
         rescue JSON::ParserError => e
           puts JSON.generate({ stat: "fail", error: "JSON parser #{e.message}" })
         end

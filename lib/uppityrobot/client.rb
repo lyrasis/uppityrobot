@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Uppityrobot
-  # Uppityrobot::Client is a CLI focused wrapper for the UptimeRobot::Client
+module UppityRobot
+  # UppityRobot::Client is a CLI focused wrapper for the UptimeRobot::Client
   class Client
     attr_reader :response
 
