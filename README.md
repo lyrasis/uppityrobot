@@ -1,38 +1,105 @@
 # Uppityrobot
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/uppityrobot`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Command line wrapper for the UptimeRobot API (wrapper).
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Requirements:
 
-```ruby
-gem 'uppityrobot'
+- [Ruby](https://www.ruby-lang.org/en/)
+- [Bundler](https://bundler.io/)
+
+```bash
+gem install uppityrobot
 ```
 
-And then execute:
+To avoid having to prefix `UPTIMEROBOT_API_KEY` before each command run:
 
-    $ bundle install
+```bash
+export UPTIMEROBOT_API_KEY=${key}
+```
 
-Or install it yourself as:
-
-    $ gem install uppityrobot
+To persist between terminal sessions add the key to `.bashrc` or equivalent.
 
 ## Usage
 
-TODO: Write usage instructions here
+### Raw API
+
+```bash
+uppityrobot exec --help
+uppityrobot exec getAlertContacts | jq . # pretty formatted using jq
+uppityrobot exec getMonitors
+```
+
+### Monitors
+
+```bash
+uppityrobot monitors --help
+uppityrobot m --help # `m` can be used if preferred
+
+# LIST
+uppityrobot monitors list # all monitors
+uppityrobot monitors list --csv ~/monitors.csv # output to terminal (json) and save as csv
+uppityrobot monitors list --search aspace # search within friendly_name and url
+uppityrobot monitors list --filter '{"friendly_name": "^aspace-"}' # monitors matching regex
+uppityrobot monitors list --filter '{"friendly_name": "^aspace-"}' --csv ~/aspace.csv
+# filter operates on the response data so can be combined with search (and csv)
+uppityrobot monitors list --search aspace --filter '{"status": 0}' # technically a regex: ^0$'
+
+# TODO
+uppityrobot monitors create --name archivesspace --url https://staff.archivesspace.edu --contacts 123,456
+
+uppityrobot monitors delete --id 1
+uppityrobot monitors delete --name archivesspace
+
+uppityrobot monitors get --id 1
+uppityrobot monitors get --name archivesspace
+
+uppityrobot monitors pause --id 1
+uppityrobot monitors pause --name archivesspace
+
+uppityrobot monitors start --id 1
+uppityrobot monitors start --name archivesspace
+
+uppityrobot monitors update --help
+uppityrobot monitors update --csv ~/aspace.csv # update monitors from csv
+uppityrobot monitors update --params '{"id": 1, "friendly_name": "newName"}' # update monitor using params
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Clone the repository then run:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```bash
+# install dependencies
+./bin/setup
+
+# interactive console
+./bin/console
+
+# run the tests
+bundle exec rspec
+
+# install locally
+bundle exec rake install
+```
+
+## Release
+
+To release a new version:
+
+- Update the version number in `version.rb`
+- Run `bundle exec rake release`
+
+This:
+
+- Creates a git tag for the version
+- Pushes git commits and the created tag
+- Pushes the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/uppityrobot.
+Bug reports and pull requests are welcome on GitHub at https://github.com/lyrasis/uppityrobot.
 
 ## License
 
