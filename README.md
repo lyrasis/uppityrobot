@@ -84,6 +84,16 @@ bundle exec rspec
 bundle exec rake install
 ```
 
+### Console examples
+
+```ruby
+client = Uppityrobot::Client.new(:getMonitors, {})
+client.paginate.each { |r, o, t| puts o; puts r.inspect; }
+
+client = Uppityrobot::Client.new(:getMonitors, {search: 'aspace'})
+client.filter({'friendly_name' => 'columbia'}).each { |m| puts m.inspect; }
+```
+
 ## Release
 
 To release a new version:
