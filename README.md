@@ -78,6 +78,8 @@ Clone the repository then run:
 ./bin/console
 
 # run the tests
+bundle exec rake # runs all tests and rubocop
+bundle exec cucumber features
 bundle exec rspec
 
 # install locally

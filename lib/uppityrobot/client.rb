@@ -54,14 +54,14 @@ module Uppityrobot
     def client
       UptimeRobot::Client.new(api_key: ENV.fetch("UPTIMEROBOT_API_KEY"))
     rescue KeyError => e
-      abort({ "stat": "fail", "error": "Error, #{e.message}" }.to_json)
+      abort({ stat: "fail", error: "Error, #{e.message}" }.to_json)
     end
 
     def verify_task(task)
       unless UptimeRobot::Client::METHODS.include? task
         error = {
-          "stat": "fail",
-          "error": "Task not recognized [#{task}], must be: #{UptimeRobot::Client::METHODS.join(", ")}"
+          stat: "fail",
+          error: "Task not recognized [#{task}], must be: #{UptimeRobot::Client::METHODS.join(", ")}"
         }.to_json
         abort(error)
       end
