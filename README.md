@@ -36,7 +36,11 @@ uppityrobot exec getMonitors
 ```bash
 uppityrobot monitors --help
 uppityrobot m --help # `m` can be used if preferred
+```
 
+Group commands:
+
+```bash
 # LIST
 uppityrobot monitors list # all monitors
 uppityrobot monitors list --csv ~/monitors.csv # output to terminal (json) and save as csv
@@ -47,6 +51,19 @@ uppityrobot monitors list --filter '{"friendly_name": "^aspace-"}' --csv ~/aspac
 uppityrobot monitors list --search aspace --filter '{"status": 0}' # technically a regex: ^0$'
 
 # TODO
+uppityrobot monitors exec pause --search aspace --filter '{"status": 1}'
+uppityrobot monitors exec start --search aspace --filter '{"status": 0}'
+
+uppityrobot monitors update --help
+uppityrobot monitors update --csv ~/aspace.csv # update monitors from csv
+uppityrobot monitors update --params '[{"id": 1, "friendly_name": "newName"}]' # update monitor using params
+uppityrobot monitors update --params '[{"id": 1, "status": 1}]' # update monitor using params
+```
+
+Individual commands:
+
+```bash
+# TODO
 uppityrobot monitors create --name archivesspace --url https://staff.archivesspace.edu --contacts 123,456
 
 uppityrobot monitors delete --id 1
@@ -54,16 +71,6 @@ uppityrobot monitors delete --name archivesspace
 
 uppityrobot monitors get --id 1
 uppityrobot monitors get --name archivesspace
-
-uppityrobot monitors pause --id 1
-uppityrobot monitors pause --name archivesspace
-
-uppityrobot monitors start --id 1
-uppityrobot monitors start --name archivesspace
-
-uppityrobot monitors update --help
-uppityrobot monitors update --csv ~/aspace.csv # update monitors from csv
-uppityrobot monitors update --params '{"id": 1, "friendly_name": "newName"}' # update monitor using params
 ```
 
 ## Development
