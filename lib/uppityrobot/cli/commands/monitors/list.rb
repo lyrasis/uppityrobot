@@ -4,7 +4,7 @@ module UppityRobot
   module CLI
     module Commands
       module Monitors
-        # # UppityRobot::CLI::Commands::Monitors::List lists monitors
+        # UppityRobot::CLI::Commands::Monitors::List lists monitors
         class List < Dry::CLI::Command
           desc "List Monitors"
 
@@ -22,12 +22,14 @@ module UppityRobot
             filter   = JSON.parse(filter)
             filtered = { stat: "ok", total: 0, monitors: [] }
             params   = search ? { search: search } : {}
+            total    = 0
 
             UppityRobot::Client.new(:getMonitors, params).filter(filter).each do |m|
               filtered[:monitors] << m
+              total += 1
             end
 
-            filtered[:total] = filtered[:monitors].count
+            filtered[:total] = total
             write_csv(csv, filtered[:monitors])
             puts filtered.to_json
           rescue JSON::ParserError => e
