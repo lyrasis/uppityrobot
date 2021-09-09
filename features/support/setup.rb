@@ -9,31 +9,38 @@ require "uppityrobot"
 module FakeUptimeRobot
   # FakeUptimeRobot app
   class Application < Sinatra::Base
+    def fixture_file_json(file)
+      JSON.parse(
+        File.read(
+          File.join(UppityRobot::ROOT, "fixtures", file)
+        )
+      ).to_json
+    end
+
     def search_fixture(term)
       case term
       when "Google"
         "getMonitors.google.json"
+      when "My Web Page"
+        "getMonitors.mywebpage.json"
       else
         "getMonitors.json"
       end
     end
 
+    post "/v2/editMonitor" do
+      content_type :json
+      fixture_file_json "editMonitor.json"
+    end
+
     post "/v2/getAlertContacts" do
       content_type :json
-      JSON.parse(
-        File.read(
-          File.join(UppityRobot::ROOT, "fixtures", "getAlertContacts.json")
-        )
-      ).to_json
+      fixture_file_json "getAlertContacts.json"
     end
 
     post "/v2/getMonitors" do
       content_type :json
-      JSON.parse(
-        File.read(
-          File.join(UppityRobot::ROOT, "fixtures", search_fixture(params[:search]))
-        )
-      ).to_json
+      fixture_file_json search_fixture(params[:search])
     end
   end
 end

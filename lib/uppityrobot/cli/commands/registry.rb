@@ -10,6 +10,7 @@ module UppityRobot
       register "version", Version, aliases: ["v", "-v", "--version"]
 
       register "monitors", aliases: ["m"] do |prefix|
+        prefix.register "exec", Monitors::Exec
         prefix.register "list", Monitors::List
       end
     end

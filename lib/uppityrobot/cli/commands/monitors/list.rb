@@ -9,7 +9,7 @@ module UppityRobot
           desc "List Monitors"
 
           option :csv, type: :string, desc: "Path to additionally save results as csv"
-          option :filter, type: :string, default: '{"friendly_name": ".*"}', desc: "Filter string for monitors"
+          option :filter, type: :string, default: "{}", desc: "Filter string for monitors"
           option :search, type: :string, desc: "keyword within url or friendly_name"
 
           example [
@@ -18,7 +18,7 @@ module UppityRobot
             '--search aspace --filter \'{"status": 0}\''
           ]
 
-          def call(csv: nil, filter: '{"friendly_name": ".*"}', search: nil, **)
+          def call(csv: nil, filter: "{}", search: nil, **)
             filter   = JSON.parse(filter)
             filtered = { stat: "ok", total: 0, monitors: [] }
             params   = search ? { search: search } : {}

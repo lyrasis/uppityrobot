@@ -50,27 +50,35 @@ uppityrobot monitors list --filter '{"friendly_name": "^aspace-"}' --csv ~/aspac
 # filter operates on the response data so can be combined with search (and csv)
 uppityrobot monitors list --search aspace --filter '{"status": 0}' # technically a regex: ^0$'
 
-# TODO
-uppityrobot monitors exec pause --search aspace --filter '{"status": 1}'
-uppityrobot monitors exec start --search aspace --filter '{"status": 0}'
+# EXEC
+uppityrobot monitors exec pause aspace # pause all monitors matching "aspace"
+uppityrobot monitors exec start aspace # start all monitors matching "aspace"
+uppityrobot monitors exec pause aspace --filter '{"status": 2}' # only pause running monitors
+uppityrobot monitors exec start aspace --filter '{"status": 0}' # only start paused monitors
 
+# TODO
 uppityrobot monitors update --help
 uppityrobot monitors update --csv ~/aspace.csv # update monitors from csv
-uppityrobot monitors update --params '[{"id": 1, "friendly_name": "newName"}]' # update monitor using params
-uppityrobot monitors update --params '[{"id": 1, "status": 1}]' # update monitor using params
+uppityrobot monitors update --params '[{"id": 1, "friendly_name": "newName"}]' # rename monitor using params
 ```
 
 Individual commands:
 
 ```bash
 # TODO
-uppityrobot monitors create --name archivesspace --url https://staff.archivesspace.edu --contacts 123,456
+uppityrobot monitors create \
+  --name archivesspace \
+  --url https://staff.archivesspace.edu \
+  --contacts 123,456
 
 uppityrobot monitors delete --id 1
 uppityrobot monitors delete --name archivesspace
 
 uppityrobot monitors get --id 1
 uppityrobot monitors get --name archivesspace
+
+uppityrobot monitors update --id 1
+uppityrobot monitors update --name archivesspace
 ```
 
 ## Development
