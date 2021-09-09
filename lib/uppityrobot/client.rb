@@ -52,7 +52,9 @@ module UppityRobot
     private
 
     def client
-      UptimeRobot::Client.new(api_key: ENV.fetch("UPTIMEROBOT_API_KEY"))
+      options = { api_key: ENV.fetch("UPTIMEROBOT_API_KEY") }
+      options[:url] = ENV["UPTIMEROBOT_ENDPOINT"] if ENV["UPTIMEROBOT_ENDPOINT"]
+      UptimeRobot::Client.new(options)
     rescue KeyError => e
       abort({ stat: "fail", error: "Error, #{e.message}" }.to_json)
     end
