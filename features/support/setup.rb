@@ -18,6 +18,15 @@ module FakeUptimeRobot
       end
     end
 
+    post "/v2/getAlertContacts" do
+      content_type :json
+      JSON.parse(
+        File.read(
+          File.join(UppityRobot::ROOT, "fixtures", "getAlertContacts.json")
+        )
+      ).to_json
+    end
+
     post "/v2/getMonitors" do
       content_type :json
       JSON.parse(
