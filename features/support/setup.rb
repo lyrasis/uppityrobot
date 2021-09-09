@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "aruba/cucumber"
+require "json_spec/cucumber"
 require "sinatra/base"
 require "capybara_discoball"
 require "uppityrobot"
@@ -35,6 +36,10 @@ FakeUptimeRobotRunner =
   end
 
 FakeUptimeRobotRunner.boot
+
+def last_json
+  last_command_started.output
+end
 
 Before do |_scenario|
   ENV["UPTIMEROBOT_API_KEY"] = "api_key"
