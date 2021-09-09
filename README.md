@@ -1,6 +1,6 @@
 # UppityRobot
 
-Command line wrapper for the UptimeRobot API (wrapper).
+Command line wrapper for the [UptimeRobot API](https://uptimerobot.com/api/) (wrapper).
 
 ## Installation
 
