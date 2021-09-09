@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Command line wrapper for the UptimeRobot API (wrapper)."
   spec.description   = "Command line wrapper for the UptimeRobot API (wrapper)."
-  spec.homepage      = "https://github.com/lyrasis/uppityrobot.git"
+  spec.homepage      = "https://github.com/mark-cooper/uppityrobot.git"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
 
