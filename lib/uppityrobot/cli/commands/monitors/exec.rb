@@ -8,7 +8,7 @@ module UppityRobot
         class Exec < Dry::CLI::Command
           desc "Execute a pause or start request for monitors"
 
-          argument :task, required: true, desc: "Pause or Start monitors"
+          argument :task, required: true, values: %w[pause start], desc: "Pause or Start monitors"
           argument :search, required: true, desc: "Search term for monitors"
 
           option :filter, type: :string, default: "{}", desc: "Filter string for monitors"

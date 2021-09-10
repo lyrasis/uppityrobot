@@ -6,12 +6,13 @@ module UppityRobot
     module Commands
       extend Dry::CLI::Registry
 
-      register "exec", Exec
+      register "exec", Exec, aliases: ["e"]
       register "version", Version, aliases: ["v", "-v", "--version"]
 
       register "monitors", aliases: ["m"] do |prefix|
-        prefix.register "exec", Monitors::Exec
-        prefix.register "list", Monitors::List
+        prefix.register "create", Monitors::Create
+        prefix.register "exec",   Monitors::Exec
+        prefix.register "list",   Monitors::List
       end
     end
   end

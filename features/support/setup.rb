@@ -42,6 +42,11 @@ module FakeUptimeRobot
       content_type :json
       fixture_file_json search_fixture(params[:search])
     end
+
+    post "/v2/newMonitor" do
+      content_type :json
+      fixture_file_json "newMonitor.json"
+    end
   end
 end
 

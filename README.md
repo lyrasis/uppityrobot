@@ -27,6 +27,7 @@ To persist between terminal sessions add the key to `.bashrc` or equivalent.
 
 ```bash
 uppityrobot exec --help
+uppityrobot e --help # `e` can be used if preferred
 uppityrobot exec getAlertContacts | jq . # pretty formatted using jq
 uppityrobot exec getMonitors
 ```
@@ -58,24 +59,21 @@ uppityrobot monitors exec start aspace --filter '{"status": 0}' # only start pau
 
 # TODO
 uppityrobot monitors update --help
-uppityrobot monitors update --csv ~/aspace.csv # update monitors from csv
-uppityrobot monitors update --params '[{"id": 1, "friendly_name": "newName"}]' # rename monitor using params
+uppityrobot monitors update csv ~/aspace.csv # update monitors from csv
+uppityrobot monitors update params '[{"id": 1, "friendly_name": "newName"}]' # rename monitor using params
 ```
 
 Individual commands:
 
 ```bash
+uppityrobot monitors create archivesspace https://staff.archivesspace.edu 123-456
+
 # TODO
-uppityrobot monitors create \
-  --name archivesspace \
-  --url https://staff.archivesspace.edu \
-  --contacts 123,456
+uppityrobot monitors delete id 1
+uppityrobot monitors delete name archivesspace
 
-uppityrobot monitors delete --id 1
-uppityrobot monitors delete --name archivesspace
-
-uppityrobot monitors get --id 1
-uppityrobot monitors get --name archivesspace
+uppityrobot monitors get id 1
+uppityrobot monitors get name archivesspace
 ```
 
 ## Development

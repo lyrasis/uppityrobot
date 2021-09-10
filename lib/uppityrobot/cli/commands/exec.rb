@@ -7,7 +7,7 @@ module UppityRobot
       class Exec < Dry::CLI::Command
         desc "Execute an API task"
 
-        argument :task, required: true, desc: "API task to be executed"
+        argument :task, required: true, values: UptimeRobot::Client::METHODS, desc: "API task to be executed"
 
         option   :data, type: :string, desc: "JSON data file"
         option   :params, type: :string, default: "{}", desc: "JSON params"
