@@ -58,7 +58,7 @@ uppityrobot monitors exec start aspace # start all monitors matching "aspace"
 uppityrobot monitors exec pause aspace --filter '{"status": 2}' # only pause running monitors
 uppityrobot monitors exec start aspace --filter '{"status": 0}' # only start paused monitors
 
-# TODO
+# UPDATE
 uppityrobot monitors update --help
 uppityrobot monitors update csv ~/aspace.csv # update monitors from csv
 uppityrobot monitors update json ~/aspace.json # update monitors from json file
