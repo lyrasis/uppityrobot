@@ -8,6 +8,7 @@ Requirements:
 
 - [Ruby](https://www.ruby-lang.org/en/)
 - [Bundler](https://bundler.io/)
+- `UPTIMEROBOT_API_KEY` environment variable
 
 ```bash
 gem install uppityrobot
