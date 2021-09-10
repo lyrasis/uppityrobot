@@ -67,14 +67,12 @@ uppityrobot monitors update params '[{"id": 1, "friendly_name": "newName"}]' # r
 Individual commands:
 
 ```bash
+# CREATE
 uppityrobot monitors create archivesspace https://staff.archivesspace.edu 123-456
 
-# TODO
+# DELETE
 uppityrobot monitors delete id 1
 uppityrobot monitors delete name archivesspace
-
-uppityrobot monitors get id 1
-uppityrobot monitors get name archivesspace
 ```
 
 ## Development

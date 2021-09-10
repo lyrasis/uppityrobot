@@ -11,6 +11,7 @@ module UppityRobot
 
       register "monitors", aliases: ["m"] do |prefix|
         prefix.register "create", Monitors::Create
+        prefix.register "delete", Monitors::Delete
         prefix.register "exec",   Monitors::Exec
         prefix.register "list",   Monitors::List
       end

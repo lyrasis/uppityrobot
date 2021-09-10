@@ -93,7 +93,7 @@ module UppityRobot
       abort(
         {
           stat: "fail",
-          error: "Did not receive exactly one result: #{response.inspect}"
+          error: "Unique record lookup failed: #{response.inspect}"
         }.to_json
       )
     end

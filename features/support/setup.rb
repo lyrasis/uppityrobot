@@ -19,13 +19,20 @@ module FakeUptimeRobot
 
     def search_fixture(term)
       case term
-      when "Google"
+      when "Google", "777749809"
         "getMonitors.google.json"
       when "My Web Page"
         "getMonitors.mywebpage.json"
+      when "LYRASIS", "123456789"
+        "getMonitor.unknown.json"
       else
         "getMonitors.json"
       end
+    end
+
+    post "/v2/deleteMonitor" do
+      content_type :json
+      fixture_file_json "deleteMonitor.json"
     end
 
     post "/v2/editMonitor" do
@@ -40,7 +47,8 @@ module FakeUptimeRobot
 
     post "/v2/getMonitors" do
       content_type :json
-      fixture_file_json search_fixture(params[:search])
+      term = params.fetch(:search, params[:monitors])
+      fixture_file_json search_fixture(term)
     end
 
     post "/v2/newMonitor" do
