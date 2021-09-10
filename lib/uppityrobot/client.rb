@@ -5,6 +5,11 @@ module UppityRobot
   class Client
     attr_reader :response
 
+    RECORD_TYPES = {
+      getAlertContacts: "alert_contacts",
+      getMonitors: "monitors"
+    }.freeze
+
     def initialize(task, params)
       @client   = client
       @task     = verify_task(task)
@@ -17,14 +22,15 @@ module UppityRobot
     end
 
     def filter(filter = {})
+      type = RECORD_TYPES[@task]
       Enumerator.new do |yielder|
         paginate.each do |response, _offset, _total|
-          response["monitors"].find_all do |monitor|
+          response[type].find_all do |record|
             satisfies_conditions = true
             filter.each do |key, regex|
-              satisfies_conditions = false unless monitor.key?(key) && monitor[key].to_s =~ /#{regex}/
+              satisfies_conditions = false unless record.key?(key) && record[key].to_s =~ /#{regex}/
             end
-            yielder << monitor if satisfies_conditions
+            yielder << record if satisfies_conditions
           end
         end
       end.lazy
@@ -49,6 +55,15 @@ module UppityRobot
       end.lazy
     end
 
+    # use when a single record result is expected & required
+    def fetch
+      verify_fetch_params
+      # TODO: support alert_contacts search (requires filter)
+      response = execute
+      verify_fetch_total response
+      response[RECORD_TYPES[@task]].first
+    end
+
     private
 
     def client
@@ -57,6 +72,30 @@ module UppityRobot
       UptimeRobot::Client.new(options)
     rescue KeyError => e
       abort({ stat: "fail", error: "Error, #{e.message}" }.to_json)
+    end
+
+    def parse_total(response)
+      response.key?("total") ? response["total"] : response["pagination"]["total"]
+    end
+
+    def verify_fetch_params
+      return if @params.key?(:search) || @params.key?(RECORD_TYPES[@task].to_sym)
+
+      abort(
+        { stat: "fail", error: "Attempted fetch without required params" }.to_json
+      )
+    end
+
+    def verify_fetch_total(response)
+      total = parse_total response
+      return if total == 1
+
+      abort(
+        {
+          stat: "fail",
+          error: "Did not receive exactly one result: #{response.inspect}"
+        }.to_json
+      )
     end
 
     def verify_task(task)

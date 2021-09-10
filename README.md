@@ -76,9 +76,6 @@ uppityrobot monitors delete --name archivesspace
 
 uppityrobot monitors get --id 1
 uppityrobot monitors get --name archivesspace
-
-uppityrobot monitors update --id 1
-uppityrobot monitors update --name archivesspace
 ```
 
 ## Development
