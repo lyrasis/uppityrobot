@@ -10,6 +10,7 @@
 
 # local data files
 *.csv
+test.json
 
 # rspec failure tracking
 .rspec_status

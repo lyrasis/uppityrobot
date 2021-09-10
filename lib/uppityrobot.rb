@@ -12,6 +12,7 @@ require_relative "uppityrobot/cli/commands/monitors/create"
 require_relative "uppityrobot/cli/commands/monitors/delete"
 require_relative "uppityrobot/cli/commands/monitors/exec"
 require_relative "uppityrobot/cli/commands/monitors/list"
+require_relative "uppityrobot/cli/commands/monitors/update"
 require_relative "uppityrobot/cli/commands/version"
 
 # load the registry last

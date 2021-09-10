@@ -14,6 +14,7 @@ module UppityRobot
         prefix.register "delete", Monitors::Delete
         prefix.register "exec",   Monitors::Exec
         prefix.register "list",   Monitors::List
+        prefix.register "update", Monitors::Update
       end
     end
   end

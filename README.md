@@ -61,7 +61,8 @@ uppityrobot monitors exec start aspace --filter '{"status": 0}' # only start pau
 # TODO
 uppityrobot monitors update --help
 uppityrobot monitors update csv ~/aspace.csv # update monitors from csv
-uppityrobot monitors update params '[{"id": 1, "friendly_name": "newName"}]' # rename monitor using params
+uppityrobot monitors update json ~/aspace.json # update monitors from json file
+uppityrobot monitors update json '[{"id": 1, "friendly_name": "newName"}]' # rename monitor using json string
 ```
 
 Individual commands:
