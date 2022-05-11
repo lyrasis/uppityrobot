@@ -124,6 +124,10 @@ gem bump --version $VERSION --tag
 # i.e.
 gem bump --version minor --tag --pretend # dryrun
 gem bump --version minor --tag # do it for real
+
+bundle
+git commit --amend # needed via Rakefile
+# now push & release
 ```
 
 ## Contributing
