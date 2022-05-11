@@ -107,18 +107,24 @@ client = UppityRobot::Client.new(:getMonitors, {search: 'aspace'})
 client.filter({'friendly_name' => 'columbia'}).each { |m| puts m.inspect; }
 ```
 
+## Including UppityRobot tasks in another project
+
+```ruby
+require "uppityrobot"
+spec = Gem::Specification.find_by_name("uppityrobot")
+load File.join(spec.gem_dir, "lib", "uppityrobot", "Rakefile")
+```
+
 ## Release
 
-To release a new version:
-
-- Update the version number in `version.rb`
-- Run `bundle exec rake release`
-
-This:
-
-- Creates a git tag for the version
-- Pushes git commits and the created tag
-- Pushes the `.gem` file to [rubygems.org](https://rubygems.org).
+```bash
+gem install gem-release
+# https://github.com/svenfuchs/gem-release#gem-bump
+gem bump --version $VERSION --tag
+# i.e.
+gem bump --version minor --tag --pretend # dryrun
+gem bump --version minor --tag # do it for real
+```
 
 ## Contributing
 

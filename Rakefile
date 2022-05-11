@@ -12,3 +12,5 @@ require "cucumber/rake/task"
 Cucumber::Rake::Task.new
 
 task default: %i[spec cucumber rubocop]
+
+load File.join("lib", "uppityrobot", "Rakefile")
