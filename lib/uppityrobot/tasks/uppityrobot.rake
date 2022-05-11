@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 namespace :uppityrobot do
   namespace :tasks do
     def alert_contacts
@@ -67,7 +69,8 @@ namespace :uppityrobot do
             UppityRobot::Client.new(:newMonitor, d).execute
           elsif current_monitors.key?(name) && current_monitors[name]["url"] != url
             puts "Updating monitor: #{current_monitors[name]["url"]} TO #{url} WITH CONTACTS #{contacts}"
-            d = { id: current_monitors[name]["id"], url: url, alert_contacts: contacts }.dup # avoid uptimerobot client weirdness
+            # avoid uptimerobot client weirdness
+            d = { id: current_monitors[name]["id"], url: url, alert_contacts: contacts }.dup
             UppityRobot::Client.new(:editMonitor, d).execute
           end
         rescue UptimeRobot::Error => e
@@ -77,3 +80,5 @@ namespace :uppityrobot do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
