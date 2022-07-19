@@ -127,7 +127,7 @@ gem bump --version minor --tag # do it for real
 
 bundle
 git commit --amend # needed via Rakefile
-# now push & release
+# PR and merge: release is published via Github Actions
 ```
 
 ## Contributing
