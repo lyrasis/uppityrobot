@@ -11,9 +11,9 @@ module UppityRobot
     }.freeze
 
     def initialize(task, params)
-      @client   = client
-      @task     = verify_task(task)
-      @params   = params
+      @client = client
+      @task = verify_task(task)
+      @params = params
       @response = nil
     end
 
@@ -40,14 +40,14 @@ module UppityRobot
       Enumerator.new do |yielder|
         @params.delete :offset # we want to start from the beginning
         response = execute # initial connection
-        offset   = 0
-        limit    = response["pagination"]["limit"]
-        total    = response["pagination"]["total"]
+        offset = 0
+        limit = response["pagination"]["limit"]
+        total = response["pagination"]["total"]
 
         loop do
           raise StopIteration if offset >= total
 
-          @params  = @params.merge({ offset: offset })
+          @params = @params.merge({offset: offset})
           response = execute
           yielder << [response, offset, total]
           offset += limit
@@ -67,11 +67,11 @@ module UppityRobot
     private
 
     def client
-      options = { api_key: ENV.fetch("UPTIMEROBOT_API_KEY") }
+      options = {api_key: ENV.fetch("UPTIMEROBOT_API_KEY")}
       options[:url] = ENV["UPTIMEROBOT_ENDPOINT"] if ENV["UPTIMEROBOT_ENDPOINT"]
       UptimeRobot::Client.new(options)
     rescue KeyError => e
-      abort({ stat: "fail", error: "Error, #{e.message}" }.to_json)
+      abort({stat: "fail", error: "Error, #{e.message}"}.to_json)
     end
 
     def parse_total(response)
@@ -82,7 +82,7 @@ module UppityRobot
       return if @params.key?(:search) || @params.key?(RECORD_TYPES[@task].to_sym)
 
       abort(
-        { stat: "fail", error: "Attempted fetch without required params" }.to_json
+        {stat: "fail", error: "Attempted fetch without required params"}.to_json
       )
     end
 

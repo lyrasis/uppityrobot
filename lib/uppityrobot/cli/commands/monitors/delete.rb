@@ -19,15 +19,15 @@ module UppityRobot
           def call(field:, value:, **)
             check_field(field)
             monitor = find_monitor(field, value)
-            response = UppityRobot::Client.new(:deleteMonitor, { id: monitor["id"] }).execute
+            response = UppityRobot::Client.new(:deleteMonitor, {id: monitor["id"]}).execute
             puts response.to_json
           end
 
           def check_field(field)
             return if %w[id name].include? field
 
-            abort({ stat: "fail",
-                    error: "Field not recognized, must be one of: [id, name]" }.to_json)
+            abort({stat: "fail",
+                   error: "Field not recognized, must be one of: [id, name]"}.to_json)
           end
 
           def find_monitor(field, value)

@@ -19,10 +19,10 @@ module UppityRobot
           ]
 
           def call(csv: nil, filter: "{}", search: nil, **)
-            filter   = JSON.parse(filter)
-            filtered = { stat: "ok", total: 0, monitors: [] }
-            params   = search ? { search: search } : {}
-            total    = 0
+            filter = JSON.parse(filter)
+            filtered = {stat: "ok", total: 0, monitors: []}
+            params = search ? {search: search} : {}
+            total = 0
 
             UppityRobot::Client.new(:getMonitors, params).filter(filter).each do |m|
               filtered[:monitors] << m
@@ -33,7 +33,7 @@ module UppityRobot
             write_csv(csv, filtered[:monitors])
             puts filtered.to_json
           rescue JSON::ParserError => e
-            puts JSON.generate({ stat: "fail", error: "JSON parser #{e.message}" })
+            puts JSON.generate({stat: "fail", error: "JSON parser #{e.message}"})
           end
 
           def write_csv(file, data)

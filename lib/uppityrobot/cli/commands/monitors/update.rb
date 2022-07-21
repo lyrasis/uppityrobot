@@ -23,11 +23,11 @@ module UppityRobot
             data = parse_data(format, data)
             unless data.is_a? Array
               abort(
-                { stat: "fail", error: "Data must be an array: #{data.inspect}" }.to_json
+                {stat: "fail", error: "Data must be an array: #{data.inspect}"}.to_json
               )
             end
 
-            updated = { stat: "ok", total: 0, updated: 0, monitors: [], errors: [] }
+            updated = {stat: "ok", total: 0, updated: 0, monitors: [], errors: []}
             data.each do |d|
               original = d.dup # UptimeRobot::Client modifies `d`, avoid this for errors
               updated[:total] += 1
@@ -39,15 +39,15 @@ module UppityRobot
 
             puts updated.to_json
           rescue CSV::MalformedCSVError, JSON::ParserError => e
-            puts JSON.generate({ stat: "fail", error: "Invalid input: #{e.message}" })
+            puts JSON.generate({stat: "fail", error: "Invalid input: #{e.message}"})
           end
           # rubocop:enable Metrics/AbcSize
 
           def check_format(format)
             return if %w[csv json].include? format
 
-            abort({ stat: "fail",
-                    error: "Format not recognized, must be one of: [csv, json]" }.to_json)
+            abort({stat: "fail",
+                   error: "Format not recognized, must be one of: [csv, json]"}.to_json)
           end
 
           def parse_data(format, data)
@@ -62,7 +62,7 @@ module UppityRobot
               end
               rows
             else
-              abort({ stat: "fail", error: "Error parsing data: #{format}, #{data.inspect}" }.to_json)
+              abort({stat: "fail", error: "Error parsing data: #{format}, #{data.inspect}"}.to_json)
             end
           end
         end

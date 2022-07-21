@@ -34,7 +34,7 @@ RSpec.describe UppityRobot::Client do
   it "can filter records" do
     client = UppityRobot::Client.new(task, params)
     expect(client.filter({}).count).to eq 2
-    expect(client.filter({ "friendly_name" => "Google" }).count).to eq 1
+    expect(client.filter({"friendly_name" => "Google"}).count).to eq 1
   end
 
   it "can paginate records" do

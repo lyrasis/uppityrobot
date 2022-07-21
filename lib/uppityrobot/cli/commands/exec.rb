@@ -9,8 +9,8 @@ module UppityRobot
 
         argument :task, required: true, values: UptimeRobot::Client::METHODS, desc: "API task to be executed"
 
-        option   :data, type: :string, desc: "JSON data file"
-        option   :params, type: :string, default: "{}", desc: "JSON params"
+        option :data, type: :string, desc: "JSON data file"
+        option :params, type: :string, default: "{}", desc: "JSON params"
 
         example [
           "getMonitors --data $json_data_file",
@@ -18,11 +18,11 @@ module UppityRobot
         ]
 
         def call(task:, data: nil, params: "{}", **)
-          task   = task.to_sym
+          task = task.to_sym
           params = data.nil? ? JSON.parse(params) : parse_file(data)
           puts UppityRobot::Client.new(task, params).execute.to_json
         rescue JSON::ParserError => e
-          puts JSON.generate({ stat: "fail", error: "JSON parser #{e.message}" })
+          puts JSON.generate({stat: "fail", error: "JSON parser #{e.message}"})
         end
 
         def parse_file(file)
