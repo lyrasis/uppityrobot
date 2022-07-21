@@ -7,7 +7,7 @@ namespace :uppityrobot do
     def alert_contacts
       ENV.fetch("UPTIMEROBOT_ALERT_CONTACTS") do
         contacts = UppityRobot::Client.new(:getAlertContacts, {}).execute
-        contact  = contacts["alert_contacts"].find { |c| c["friendly_name"] == friendly_name }
+        contact = contacts["alert_contacts"].find { |c| c["friendly_name"] == friendly_name }
         raise "CONTACT NOT FOUND" unless contact
 
         contact["id"]
@@ -45,17 +45,16 @@ namespace :uppityrobot do
       raise "UPTIMEROBOT_API_KEY is required" unless ENV["UPTIMEROBOT_API_KEY"]
 
       prefix = args[:prefix]
-      csv    = args.fetch(:csv, File.join(Dir.getwd, "files", "monitors", "uptimerobot.csv"))
+      csv = args.fetch(:csv, File.join(Dir.getwd, "files", "monitors", "uptimerobot.csv"))
       raise "CSV not found" unless File.file? csv
 
-      contacts         = alert_contacts
+      contacts = alert_contacts
       current_monitors = monitors(prefix: prefix)
 
       CSV.read(csv, headers: true).each do |row|
-        data     = row.to_hash
-        name     = data["friendly_name"]
-        url      = data["url"]
-        interval = data.fetch("interval", 300)
+        data = row.to_hash
+        name = data["friendly_name"]
+        url = data["url"]
 
         begin
           if !current_monitors.key?(name)
@@ -70,10 +69,10 @@ namespace :uppityrobot do
             }
             UppityRobot::Client.new(:newMonitor, d).execute
           elsif current_monitors.key?(name) &&
-                (current_monitors[name]["url"] != url || current_monitors[name]["interval"] != interval)
+              (current_monitors[name]["url"] != url || current_monitors[name]["interval"] != interval)
             puts "Updating monitor: #{current_monitors[name]["url"]} TO #{url} [#{interval}] WITH CONTACTS #{contacts}"
             # avoid uptimerobot client weirdness
-            d = { id: current_monitors[name]["id"], url: url, interval: interval, alert_contacts: contacts }.dup
+            d = {id: current_monitors[name]["id"], url: url, alert_contacts: contacts}.dup
             UppityRobot::Client.new(:editMonitor, d).execute
           end
         rescue UptimeRobot::Error => e

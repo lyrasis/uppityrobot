@@ -30,7 +30,7 @@ module UppityRobot
             response = UppityRobot::Client.new(:newMonitor, data).execute
             puts response.to_json
           rescue URI::InvalidURIError => e
-            puts JSON.generate({ stat: "fail", error: "URI parser #{e.message}" })
+            puts JSON.generate({stat: "fail", error: "URI parser #{e.message}"})
           end
 
           def check_subtype(uri)
@@ -39,8 +39,8 @@ module UppityRobot
             elsif uri.instance_of?(URI::HTTPS)
               UptimeRobot::Monitor::SubType::HTTPS
             else
-              abort({ stat: "fail",
-                      error: "Monitor URL must be HTTP/S" }.to_json)
+              abort({stat: "fail",
+                     error: "Monitor URL must be HTTP/S"}.to_json)
             end
           end
         end
