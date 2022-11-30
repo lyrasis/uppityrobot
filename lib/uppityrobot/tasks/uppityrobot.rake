@@ -55,6 +55,7 @@ namespace :uppityrobot do
         data = row.to_hash
         name = data["friendly_name"]
         url = data["url"]
+        interval = data.fetch("interval", 300)
 
         begin
           if !current_monitors.key?(name)
@@ -72,7 +73,7 @@ namespace :uppityrobot do
               (current_monitors[name]["url"] != url || current_monitors[name]["interval"] != interval)
             puts "Updating monitor: #{current_monitors[name]["url"]} TO #{url} [#{interval}] WITH CONTACTS #{contacts}"
             # avoid uptimerobot client weirdness
-            d = {id: current_monitors[name]["id"], url: url, alert_contacts: contacts}.dup
+            d = {id: current_monitors[name]["id"], url: url, interval: interval, alert_contacts: contacts}.dup
             UppityRobot::Client.new(:editMonitor, d).execute
           end
         rescue UptimeRobot::Error => e
